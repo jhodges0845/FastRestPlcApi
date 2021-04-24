@@ -9,13 +9,30 @@ def read_plc(ip_address, tag_name):
         return ""
 
 
-def write_plc(ip_address, tag_name, data_type, tag_value):
+def write_plc(ip_address, tag_name, tag_value):
     try:
-        with LogixDriver(ip_address) as plc:
-            # Validate value is same as tag data_type
 
+        with LogixDriver(ip_address) as plc:
             result = plc.write(tag_name, tag_value)
             return result
+
     except:
         # log error
+        return ""
+
+
+def info_plc(ip_address):
+    try:
+        with LogixDriver(ip_address) as plc:
+            return plc.info
+    except:
+        # Log error
+        return ""
+
+def read_all_plc(ip_address):
+    try:
+        with LogixDriver(ip_address) as plc:
+            return plc.tags
+    except:
+        # Log error#
         return ""
